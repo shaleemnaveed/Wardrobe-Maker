@@ -26,7 +26,7 @@ generateButton.addEventListener('click', () => {
     }
     const outfits = GenerateOutfits(uploadedTops, uploadedBottoms);
     generatedDiv.innerHTML = '';
-    outfits.slice(0, 5).forEach(outfit => {
+    outfits.slice(0, 4).forEach(outfit => {
 
         const card = document.createElement('div');
         card.classList.add('outfitCard');
@@ -75,7 +75,7 @@ function HandleInput(input, image, display, category) {
             const dominantColor = colorThief.getColor(image);
             const colorRgb = `rgb(${dominantColor.join(',')})`;
             display.style.backgroundColor = colorRgb;
-            
+
             const item = { image: imageUrl, color: colorRgb };
             if (category === 'tops') {
                 uploadedTops.push(item);
