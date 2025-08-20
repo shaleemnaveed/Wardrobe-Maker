@@ -1,0 +1,186 @@
+/* ===== General Reset & Body ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fb, #eef2f7);
+    color: #333;
+    padding: 20px;
+}
+
+/* ===== Main Container ===== */
+main {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* ===== Outfits Flex Layout ===== */
+#outfits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+/* ===== Section Styling (Tops/Bottoms) ===== */
+#tops,
+#bottoms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+}
+
+/* ===== Figure Styling ===== */
+figure {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+figure:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Uploaded Images ===== */
+.uploadedImage {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #eee;
+    margin-top: 12px;
+    transition: transform 0.3s ease;
+}
+
+.uploadedImage:hover {
+    transform: scale(1.05);
+}
+
+/* ===== Dominant Color Overlay ===== */
+.colorDisplay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== File Input ===== */
+.fileInput {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: background 0.2s;
+}
+
+.fileInput:hover {
+    background: #f3f3f3;
+}
+
+/* ===== Caption Styling ===== */
+figcaption {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 1.1em;
+    text-align: center;
+    color: #444;
+}
+
+/* ===== Generate Button ===== */
+#generateOutfits {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s, box-shadow 0.25s, background 0.3s;
+}
+
+#generateOutfits:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+}
+
+/* ===== Generated Outfits Section ===== */
+#generatedOutfits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.outfitCard {
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.outfitCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.generatedImage {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #eee;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+    #outfits {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .uploadedImage {
+        width: 130px;
+        height: 130px;
+    }
+
+    .colorDisplay {
+        width: 40px;
+        height: 40px;
+        font-size: 0.6em;
+    }
+}
