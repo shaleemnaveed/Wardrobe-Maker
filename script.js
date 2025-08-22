@@ -61,8 +61,8 @@ generateButton.addEventListener('click', () => {
 // Functions: 
 
 function HandleInput(input, image, display, category) {
-    if (!input.files || input.files.length === 0)
-        return;
+    if (!input.files || input.files.length === 0) return;
+
     const file = input.files[0];
     const reader = new FileReader();
 
@@ -71,20 +71,52 @@ function HandleInput(input, image, display, category) {
         image.src = imageUrl;
 
         image.onload = function () {
-            const colorThief = new ColorThief();
-            const dominantColor = colorThief.getColor(image);
-            const colorRgb = `rgb(${dominantColor.join(',')})`;
-            display.style.backgroundColor = colorRgb;
+            // Grab dominant color from central portion
+            const dominantColor = GetDominantColorFromCenter(image);
+            display.style.backgroundColor = dominantColor;
 
-            const item = { image: imageUrl, color: colorRgb };
-            if (category === 'tops') {
-                uploadedTops.push(item);
-            } else if (category === 'bottoms') {
-                uploadedBottoms.push(item);
-            }
+            const item = { image: imageUrl, color: dominantColor };
+            if (category === 'tops') uploadedTops.push(item);
+            else if (category === 'bottoms') uploadedBottoms.push(item);
         };
     };
+
     reader.readAsDataURL(file);
+}
+
+function GetDominantColorFromCenter(img) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0, img.width, img.height);
+
+    const imageData = ctx.getImageData(0, 0, img.width, img.height);
+    const data = imageData.data;
+
+    let rTotal = 0, gTotal = 0, bTotal = 0, count = 0;
+
+    // Central region (60% of width/height)
+    const startX = Math.floor(img.width * 0.2);
+    const endX = Math.floor(img.width * 0.8);
+    const startY = Math.floor(img.height * 0.2);
+    const endY = Math.floor(img.height * 0.8);
+
+    for (let y = startY; y < endY; y++) {
+        for (let x = startX; x < endX; x++) {
+            const i = (y * img.width + x) * 4;
+            rTotal += data[i];
+            gTotal += data[i + 1];
+            bTotal += data[i + 2];
+            count++;
+        }
+    }
+
+    const rAvg = Math.round(rTotal / count);
+    const gAvg = Math.round(gTotal / count);
+    const bAvg = Math.round(bTotal / count);
+
+    return `rgb(${rAvg}, ${gAvg}, ${bAvg})`;
 }
 
 function GenerateOutfits(tops, bottoms) {
