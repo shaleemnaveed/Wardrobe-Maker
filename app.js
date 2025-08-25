@@ -166,12 +166,17 @@ closeOverlayBtns.forEach(btn => {
 // ======= UPDATE PREVIEW =======
 function updatePreview(category, imageUrl, color) {
     const container = document.getElementById(category);
+    if (!container) return;
+
     const figure = container.querySelector('figure');
+    if (!figure) return;
+
     const img = figure.querySelector('.uploadedImage');
     const display = figure.querySelector('.colorDisplay');
+    if (!img || !display) return;
 
-    img.src = imageUrl;
-    display.style.backgroundColor = color;
+    img.src = imageUrl || '';
+    display.style.backgroundColor = color || '';
 }
 
 // ======= TOPS GALLERY =======
