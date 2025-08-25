@@ -63,15 +63,29 @@ function handleInput(input, image, display, category) {
             const dominantColor = getDominantColorFromCenter(image);
             display.style.backgroundColor = dominantColor;
 
-            // New uploads are active by default
+            // New item
             const item = { image: imageUrl, color: dominantColor, active: true };
 
             if (category === 'tops') {
-                uploadedTops.push(item);
+                const existing = uploadedTops.find(t => t.image === imageUrl);
+                if (!existing) {
+                    // Add new
+                    uploadedTops.push(item);
+                } else {
+                    // Activate existing
+                    existing.active = true;
+                    existing.color = dominantColor; // optional: update color
+                }
                 localStorage.setItem('uploadedTops', JSON.stringify(uploadedTops));
                 renderTopsGallery();
             } else if (category === 'bottoms') {
-                uploadedBottoms.push(item);
+                const existing = uploadedBottoms.find(b => b.image === imageUrl);
+                if (!existing) {
+                    uploadedBottoms.push(item);
+                } else {
+                    existing.active = true;
+                    existing.color = dominantColor; // optional: update color
+                }
                 localStorage.setItem('uploadedBottoms', JSON.stringify(uploadedBottoms));
                 renderBottomsGallery();
             }
