@@ -24,7 +24,7 @@
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== General Reset & Body ===== */
+/* ===== RESET & BODY STYLING ===== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -38,7 +38,7 @@ body {
     padding: 20px;
 }
 
-/* ===== Main Container ===== */
+/* ===== MAIN CONTAINER ===== */
 main {
     max-width: 1000px;
     margin: auto;
@@ -48,6 +48,7 @@ a {
     text-decoration: none;
 }
 
+/* ===== HEADER & FOOTER ===== */
 .site-header {
     text-align: center;
     padding: 1.5rem 1rem;
@@ -72,11 +73,11 @@ footer {
     padding: 1rem;
     color: #666;
     border-top: 1px solid #ccc; /* straight line border */
-    margin-top: 2rem; /* optional spacing above footer */
+    margin-top: 2rem;
     background-color: #f4f4f4;
 }
 
-/* ===== Outfits Flex Layout ===== */
+/* ===== OUTFITS FLEX LAYOUT ===== */
 #outfits {
     display: flex;
     flex-wrap: wrap;
@@ -85,7 +86,7 @@ footer {
     margin-bottom: 30px;
 }
 
-/* ===== Section Styling (Tops/Bottoms) ===== */
+/* ===== SECTION STYLING (TOPS/BOTTOMS) ===== */
 #tops,
 #bottoms {
     display: flex;
@@ -94,7 +95,7 @@ footer {
     min-width: 200px;
 }
 
-/* ===== Figure Styling ===== */
+/* ===== FIGURE STYLING ===== */
 figure {
     position: relative;
     display: flex;
@@ -112,7 +113,7 @@ figure:hover {
     box-shadow: 0 12px 28px var(--hover-shadow);
 }
 
-/* ===== Uploaded Images ===== */
+/* ===== UPLOADED IMAGES ===== */
 .uploadedImage {
     width: var(--thumb-size);
     height: var(--thumb-size);
@@ -127,7 +128,7 @@ figure:hover {
     transform: scale(1.05);
 }
 
-/* ===== Dominant Color Overlay ===== */
+/* ===== DOMINANT COLOR DISPLAY ===== */
 .colorDisplay {
     position: absolute;
     bottom: 20px;
@@ -146,12 +147,12 @@ figure:hover {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-/* ===== File Input ===== */
+/* ===== FILE INPUT ===== */
 .fileInput {
-    display: none; /* hide the default input */
+    display: none;
 }
 
-/* Styled label acting as file button */
+/* ===== UPLOAD BUTTON ===== */
 .uploadButton {
     display: inline-block;
     padding: 8px 16px;
@@ -171,7 +172,7 @@ figure:hover {
     background: var(--hover-gradient);
 }
 
-/* ===== Gallery Open Buttons ===== */
+/* ===== GALLERY OPEN BUTTON ===== */
 .openGalleryButton {
     display: inline-block;
     padding: 8px 16px;
@@ -181,9 +182,8 @@ figure:hover {
     font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
-    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
-    text-align: center;
     border: none;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
 }
 
 .openGalleryButton:hover {
@@ -192,7 +192,7 @@ figure:hover {
     background: var(--hover-gradient);
 }
 
-/* ===== Caption Styling ===== */
+/* ===== FIGCAPTION / LABELS ===== */
 figcaption {
     margin-top: 10px;
     font-weight: 600;
@@ -201,7 +201,7 @@ figcaption {
     color: #444;
 }
 
-/* ===== Generate Button ===== */
+/* ===== GENERATE BUTTON ===== */
 #generateOutfits {
     display: block;
     margin: 20px auto;
@@ -223,7 +223,7 @@ figcaption {
     background: var(--hover-gradient);
 }
 
-/* ===== Generated Outfits Section ===== */
+/* ===== GENERATED OUTFITS SECTION ===== */
 #generatedOutfits {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -256,7 +256,7 @@ figcaption {
     border: 2px solid #eee;
 }
 
-/* ===== Gallery Controls ===== */
+/* ===== GALLERY CONTROLS ===== */
 .galleryControls, #useSelectedTops, #useSelectedBottoms {
     display: flex;
     justify-content: center;
@@ -282,14 +282,14 @@ figcaption {
     background: var(--hover-gradient);
 }
 
-/* ===== Gallery Layout ===== */
+/* ===== GALLERY GRID ===== */
 #topsGallery, #bottomsGallery, #gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 20px;
 }
 
-/* ===== Individual Gallery Cards ===== */
+/* ===== INDIVIDUAL GALLERY CARDS ===== */
 .galleryCard {
     position: relative;
     background: var(--card-bg);
@@ -309,7 +309,7 @@ figcaption {
     box-shadow: 0 12px 28px var(--hover-shadow);
 }
 
-/* ===== Thumbnails ===== */
+/* ===== THUMBNAILS ===== */
 .thumbnail {
     width: var(--thumb-size);
     height: var(--thumb-size);
@@ -324,7 +324,7 @@ figcaption {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* ===== Active Circle & Delete ===== */
+/* ===== ACTIVE CIRCLE & DELETE BUTTON ===== */
 .activeCircle {
     width: var(--circle-size);
     height: var(--circle-size);
@@ -361,7 +361,7 @@ figcaption {
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* ===== Overlay Styling ===== */
+/* ===== OVERLAY STYLING ===== */
 .overlay {
     position: fixed;
     top: 0;
@@ -410,7 +410,7 @@ figcaption {
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* ===== Gallery Grid inside Overlay ===== */
+/* ===== GALLERY GRID INSIDE OVERLAY ===== */
 #topsGallery, #bottomsGallery {
     max-height: 60vh;
     overflow-y: auto;
@@ -430,7 +430,7 @@ figcaption {
     background: var(--scrollbar-track);
 }
 
-/* ===== Responsive ===== */
+/* ===== RESPONSIVE STYLING ===== */
 @media (max-width: 600px) {
     #outfits { flex-direction: column; gap: 25px; }
     .uploadedImage { width: 130px; height: 130px; }

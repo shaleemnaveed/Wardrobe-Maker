@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- ======= META & PAGE INFO ======= -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wardrobe Maker</title>
@@ -9,12 +10,17 @@
 </head>
 
 <body>
+    <!-- ======= HEADER ======= -->
     <header class="site-header">
         <h1>Wardrobe Maker</h1>
         <p class="tagline">Create and preview outfits instantly!</p>
     </header>
+
+    <!-- ======= MAIN CONTENT ======= -->
     <main>
+        <!-- ======= UPLOAD SECTIONS ======= -->
         <div id="outfits">
+            <!-- ======= TOPS UPLOAD ======= -->
             <div id="tops">
                 <figure>
                     <input type="file" class="fileInput" accept="image/*" data-category="tops" id="topsInput">
@@ -27,6 +33,7 @@
                 </figcaption>
             </div>
 
+            <!-- ======= BOTTOMS UPLOAD ======= -->
             <div id="bottoms">
                 <figure>
                     <input type="file" class="fileInput" accept="image/*" data-category="bottoms" id="bottomsInput">
@@ -40,14 +47,17 @@
             </div>
         </div>
 
+        <!-- ======= OUTFIT GENERATION ======= -->
         <button id="generateOutfits">Generate Outfits</button>
         <div id="generatedOutfits"></div>
     </main>
+
+    <!-- ======= FOOTER ======= -->
     <footer>
         <p>&copy; 2025 | Shaleem Naveed | All rights reserved.</p>
     </footer>
 
-    <!-- Tops overlay -->
+    <!-- ======= TOPS OVERLAY ======= -->
     <div id="topsOverlay" class="overlay">
         <div class="overlayContent">
             <button class="closeOverlay" data-target="topsOverlay">Close</button>
@@ -60,7 +70,7 @@
         </div>
     </div>
 
-    <!-- Bottoms overlay -->
+    <!-- ======= BOTTOMS OVERLAY ======= -->
     <div id="bottomsOverlay" class="overlay">
         <div class="overlayContent">
             <button class="closeOverlay" data-target="bottomsOverlay">Close</button>
@@ -73,7 +83,7 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- ======= SCRIPTS ======= -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"></script>
     <script src="app.js"></script>

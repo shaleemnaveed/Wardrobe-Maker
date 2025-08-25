@@ -8,7 +8,7 @@ savedTops.forEach(top => uploadedTops.push({ ...top, active: false }));
 const savedBottoms = JSON.parse(localStorage.getItem('uploadedBottoms')) || [];
 savedBottoms.forEach(bottom => uploadedBottoms.push({ ...bottom, active: false }));
 
-// ======= ELEMENTS =======
+// ======= ELEMENT REFERENCES =======
 const outfitsContainer = document.getElementById('outfits');
 const generateButton = document.getElementById('generateOutfits');
 const generatedDiv = document.getElementById('generatedOutfits');
@@ -33,7 +33,7 @@ const bottomsRemoveAll = document.getElementById('removeAllBottoms');
 const bottomsDeselectAll = document.getElementById('deselectAllBottoms');
 const bottomsSelectAll = document.getElementById('selectAllBottoms');
 
-// ======= LINK UPLOAD BUTTONS =======
+// ======= LINKED UPLOAD BUTTONS =======
 const topsInput = document.getElementById('topsInput');
 const bottomsInput = document.getElementById('bottomsInput');
 
@@ -50,6 +50,7 @@ outfitsContainer.addEventListener('change', (event) => {
     }
 });
 
+// ======= FILE READING & PROCESSING =======
 function handleInput(input, image, display, category) {
     if (!input.files || input.files.length === 0) return;
     const file = input.files[0];
@@ -63,28 +64,23 @@ function handleInput(input, image, display, category) {
             const dominantColor = getDominantColorFromCenter(image);
             display.style.backgroundColor = dominantColor;
 
-            // New item
             const item = { image: imageUrl, color: dominantColor, active: true };
 
             if (category === 'tops') {
                 const existing = uploadedTops.find(t => t.image === imageUrl);
-                if (!existing) {
-                    // Add new
-                    uploadedTops.push(item);
-                } else {
-                    // Activate existing
+                if (!existing) uploadedTops.push(item);
+                else {
                     existing.active = true;
-                    existing.color = dominantColor; // optional: update color
+                    existing.color = dominantColor;
                 }
                 localStorage.setItem('uploadedTops', JSON.stringify(uploadedTops));
                 renderTopsGallery();
             } else if (category === 'bottoms') {
                 const existing = uploadedBottoms.find(b => b.image === imageUrl);
-                if (!existing) {
-                    uploadedBottoms.push(item);
-                } else {
+                if (!existing) uploadedBottoms.push(item);
+                else {
                     existing.active = true;
-                    existing.color = dominantColor; // optional: update color
+                    existing.color = dominantColor;
                 }
                 localStorage.setItem('uploadedBottoms', JSON.stringify(uploadedBottoms));
                 renderBottomsGallery();
@@ -95,6 +91,7 @@ function handleInput(input, image, display, category) {
     reader.readAsDataURL(file);
 }
 
+// ======= DOM HELPER: DOMINANT COLOR =======
 function getDominantColorFromCenter(img) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -103,8 +100,8 @@ function getDominantColorFromCenter(img) {
     ctx.drawImage(img, 0, 0, img.width, img.height);
 
     const data = ctx.getImageData(0, 0, img.width, img.height).data;
-
     let rTotal = 0, gTotal = 0, bTotal = 0, count = 0;
+
     const startX = Math.floor(img.width * 0.2);
     const endX = Math.floor(img.width * 0.8);
     const startY = Math.floor(img.height * 0.2);
@@ -177,7 +174,7 @@ closeOverlayBtns.forEach(btn => {
     btn.addEventListener('click', () => document.getElementById(btn.dataset.target).classList.remove('active'));
 });
 
-// ======= UPDATE PREVIEW =======
+// ======= UPDATE PREVIEW FUNCTION =======
 function updatePreview(category, imageUrl, color) {
     const container = document.getElementById(category);
     if (!container) return;
@@ -213,7 +210,6 @@ function renderTopsGallery() {
             localStorage.setItem('uploadedTops', JSON.stringify(uploadedTops));
             renderTopsGallery();
 
-            // Live preview logic
             if (top.active) updatePreview('tops', top.image, top.color);
             else {
                 const anotherActive = uploadedTops.find(t => t.active);
@@ -243,35 +239,6 @@ function renderTopsGallery() {
     });
 }
 
-// Bulk controls for tops
-topsRemoveAll.addEventListener('click', () => {
-    if (confirm("Are you sure you want to remove all tops?")) {
-        uploadedTops.length = 0;
-        localStorage.removeItem('uploadedTops');
-        renderTopsGallery();
-
-        // Clear preview
-        updatePreview('tops', '', '');
-    }
-});
-
-topsSelectAll.addEventListener('click', () => {
-    uploadedTops.forEach(t => t.active = true);
-    localStorage.setItem('uploadedTops', JSON.stringify(uploadedTops));
-    renderTopsGallery();
-
-    const firstActive = uploadedTops.find(t => t.active);
-    if (firstActive) updatePreview('tops', firstActive.image, firstActive.color);
-});
-
-topsDeselectAll.addEventListener('click', () => {
-    uploadedTops.forEach(t => t.active = false);
-    localStorage.setItem('uploadedTops', JSON.stringify(uploadedTops));
-    renderTopsGallery();
-
-    updatePreview('tops', '', '');
-});
-
 // ======= BOTTOMS GALLERY =======
 function renderBottomsGallery() {
     bottomsGallery.innerHTML = '';
@@ -292,7 +259,6 @@ function renderBottomsGallery() {
             localStorage.setItem('uploadedBottoms', JSON.stringify(uploadedBottoms));
             renderBottomsGallery();
 
-            // Live preview logic
             if (bottom.active) updatePreview('bottoms', bottom.image, bottom.color);
             else {
                 const anotherActive = uploadedBottoms.find(b => b.active);
@@ -322,18 +288,40 @@ function renderBottomsGallery() {
     });
 }
 
-// Bulk controls for bottoms
+// ======= BULK CONTROLS =======
+// Tops
+topsRemoveAll.addEventListener('click', () => {
+    if (confirm("Are you sure you want to remove all tops?")) {
+        uploadedTops.length = 0;
+        localStorage.removeItem('uploadedTops');
+        renderTopsGallery();
+        updatePreview('tops', '', '');
+    }
+});
+topsSelectAll.addEventListener('click', () => {
+    uploadedTops.forEach(t => t.active = true);
+    localStorage.setItem('uploadedTops', JSON.stringify(uploadedTops));
+    renderTopsGallery();
+
+    const firstActive = uploadedTops.find(t => t.active);
+    if (firstActive) updatePreview('tops', firstActive.image, firstActive.color);
+});
+topsDeselectAll.addEventListener('click', () => {
+    uploadedTops.forEach(t => t.active = false);
+    localStorage.setItem('uploadedTops', JSON.stringify(uploadedTops));
+    renderTopsGallery();
+    updatePreview('tops', '', '');
+});
+
+// Bottoms
 bottomsRemoveAll.addEventListener('click', () => {
     if (confirm("Are you sure you want to remove all bottoms?")) {
         uploadedBottoms.length = 0;
         localStorage.removeItem('uploadedBottoms');
         renderBottomsGallery();
-
-        // Clear preview
         updatePreview('bottoms', '', '');
     }
 });
-
 bottomsSelectAll.addEventListener('click', () => {
     uploadedBottoms.forEach(b => b.active = true);
     localStorage.setItem('uploadedBottoms', JSON.stringify(uploadedBottoms));
@@ -342,15 +330,13 @@ bottomsSelectAll.addEventListener('click', () => {
     const firstActive = uploadedBottoms.find(b => b.active);
     if (firstActive) updatePreview('bottoms', firstActive.image, firstActive.color);
 });
-
 bottomsDeselectAll.addEventListener('click', () => {
     uploadedBottoms.forEach(b => b.active = false);
     localStorage.setItem('uploadedBottoms', JSON.stringify(uploadedBottoms));
     renderBottomsGallery();
-
     updatePreview('bottoms', '', '');
 });
 
-// Initial render
+// ======= INITIAL RENDER =======
 renderTopsGallery();
 renderBottomsGallery();
