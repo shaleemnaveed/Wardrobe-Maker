@@ -136,7 +136,7 @@ generateButton.addEventListener('click', () => {
 
     const outfits = generateOutfits(activeTops, activeBottoms);
     generatedDiv.innerHTML = '';
-    outfits.slice(0, 4).forEach(outfit => {
+    outfits.forEach(outfit => {
         const card = document.createElement('div');
         card.classList.add('outfitCard');
 
