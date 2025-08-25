@@ -230,6 +230,9 @@ topsRemoveAll.addEventListener('click', () => {
         uploadedTops.length = 0;
         localStorage.removeItem('uploadedTops');
         renderTopsGallery();
+
+        // Clear preview
+        updatePreview('tops', '', '');
     }
 });
 
@@ -306,6 +309,9 @@ bottomsRemoveAll.addEventListener('click', () => {
         uploadedBottoms.length = 0;
         localStorage.removeItem('uploadedBottoms');
         renderBottomsGallery();
+
+        // Clear preview
+        updatePreview('bottoms', '', '');
     }
 });
 
